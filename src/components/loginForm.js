@@ -1,33 +1,34 @@
 import { useState } from "react";
-//import { Navigate } from "react-router-dom";
 import { FormattedMessage, useIntl } from "react-intl";
 import imgfile from "../img/gaubiz_logo.png"
-import { useDispatch } from "react-redux";
+
 //StyleCss
 import "../style.css";
 
-function LoginForm({authenticated, login, location}) {
+function LoginForm({signIn, login}) {
 
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [loading, setLoading] = useState("");
+  const [userName, setUserName] = useState("");
+  const [passWord, setPassword] = useState("");
 
   const [locale, setLocale] = useState(localStorage.getItem("locale") ?? "ko"); //local 기본값 - 한국어
   const intl = useIntl();
 
   const onSubmit = (e) => {
     
-    localStorage.setItem("locale", locale);
     e.preventDegault();
+    localStorage.setItem("locale", locale);
+    
     try {
-      login({ username, password});
+      login({ userName, passWord});
+      signIn({ userName, passWord});
     } catch (err) {
       alert("로그인에 실패했습니다. 계정정보를 다시 확인해주세요.");
       setUserName("");
       setPassword("");
     }
   };
+
+ 
 
   // const { from } = location.state || { from: { pathname: "/" } };
   // if (authenticated) return <Navigate to={from} />
@@ -86,15 +87,15 @@ function LoginForm({authenticated, login, location}) {
           <div className="input-container">
             <label htmlFor="locale">
               <FormattedMessage
-              id="username"
+              id="userName"
               defaultMessage="아이디" 
               />
               </label>
           <input 
               type="text" 
-              name="username" 
-              id="username" 
-              value={username}
+              name="userName" 
+              id="userName" 
+              value={userName}
               onChange={(e) => setUserName(e.target.value)}
                />
               {/* {renderErrorMessage("uname")} */}
@@ -102,15 +103,15 @@ function LoginForm({authenticated, login, location}) {
             <div className="input-container">
             <label htmlFor="locale">
               <FormattedMessage
-              id="password"
+              id="passWord"
               defaultMessage="비밀번호" 
               />
               </label>
             <input 
-                type="password" 
-                name="password" 
-                id="password"
-                value={password}
+                type="passWord" 
+                name="passWord" 
+                id="passWord"
+                value={passWord}
                 onChange={(e) => setPassword(e.target.value)}
                  />
             {/* {renderErrorMessage("pass")} */}

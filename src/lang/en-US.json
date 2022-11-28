@@ -2,7 +2,7 @@
     "title" : "login",
     "info": "The current language is {locale}.",
     "label" : "language : ",
-    "username" : "User ID",
-    "password" : "Password",
+    "userName" : "User ID",
+    "passWord" : "Password",
     "submit" : "Enter"
 }
